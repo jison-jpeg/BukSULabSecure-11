@@ -70,4 +70,21 @@ class User extends Authenticatable
     {
         return $this->hasOne(Student::class);
     }
+
+    public function getFullNameAttribute()
+    {
+        $fullName = $this->first_name;
+
+        if ($this->middle_name) {
+            $fullName .= ' ' . $this->middle_name;
+        }
+
+        $fullName .= ' ' . $this->last_name;
+
+        if ($this->suffix) {
+            $fullName .= ' ' . $this->suffix;
+        }
+
+        return $fullName;
+    }
 }
